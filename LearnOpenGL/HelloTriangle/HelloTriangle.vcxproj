@@ -73,6 +73,10 @@
     <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>../../glad/include;../../glfw/include;../../glfw/;$(IncludePath)</IncludePath>
+    <LibraryPath>G:\Code\LearnOpenGL\glfw\lib;../../glfw/lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -91,6 +95,10 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>../../glfw/lib/glfw3.lib;G:\Code\LearnOpenGL\glfw\lib\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>G:\Code\LearnOpenGL\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
