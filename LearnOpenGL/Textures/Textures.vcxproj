@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;..\stb;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\glfw\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -123,9 +123,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\glad\src\glad.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ShaderTool\Shader.h" />
+    <ClInclude Include="..\stb\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
