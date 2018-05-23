@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "../ShaderTool/Shader.h"
+#include "../CameraTool/camera.h"
 #include "stb_image.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,6 +15,18 @@ const unsigned int SCR_HEIGHT = 600;
 void processInput(GLFWwindow* window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+// timing
+float deltaTime = 0.0f;	// time between current frame and last frame
+float lastFrame = 0.0f;
+
+bool bFirstMove = true;
+float lastX = 400;
+float lastY = 300;
+float pitch = 0;
+float yaw = 0;
 int main()
 {
 	glfwInit();
@@ -171,6 +184,10 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+
 		processInput(window);
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -187,14 +204,10 @@ int main()
 		float radius = 10.f;
 		float camX = (float)sin(glfwGetTime()) * radius;
 		float camZ = (float)cos(glfwGetTime()) * radius;
-		view = glm::lookAt(glm::vec3(camX, 1.f, camZ), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
+		//view = glm::lookAt(glm::vec3(camX, 1.f, camZ), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.f, 1.f, 0.f));
+		view = glm::lookAt(glm::vec3(cameraPos), cameraPos + cameraFront, cameraUp);
 		ourShader.setMat4("view", view);
 
-		view = glm::translate(view, glm::vec3(0.f, 0.f, -3.f));
-
-		unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-		
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized	
 		for (int i = 0; i < 10; i++)
@@ -208,6 +221,7 @@ int main()
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 		
+
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glfwSwapBuffers(window);
@@ -233,4 +247,62 @@ void processInput(GLFWwindow* window)
 	{
 		glfwSetWindowShouldClose(window, true);
 	}
+
+	float cameraSpeed = 2.5f * deltaTime;
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		cameraPos += cameraSpeed * cameraFront;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		cameraPos -= cameraSpeed * cameraFront;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+	}
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	if (bFirstMove)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		bFirstMove = false;
+	}
+
+	float xoffset = xpos - lastX;
+	lastX = xpos;
+	float yoffset = ypos - lastY;
+	lastY = ypos;
+
+	float sensitivity = 0.05;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
+
+	if (pitch > 90)
+	{
+		pitch = 89;
+	}
+	else if (pitch < -90)
+	{
+		pitch = -89;
+	}
+
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+
 }
