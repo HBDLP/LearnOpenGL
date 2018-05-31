@@ -1,0 +1,17 @@
+﻿  main.cpp
+g:\code\learnopengl\learnopengl\shadertool\shader.h(55): warning C4101: “infoLog”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\shadertool\shader.h(54): warning C4101: “success”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(142): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(112): warning C4101: “height”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(112): warning C4101: “nrChannels”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(112): warning C4101: “width”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(111): warning C4101: “texture1”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(111): warning C4101: “texture2”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(220): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(221): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(225): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(226): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(228): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(229): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\basiclighting\main.cpp(243): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  BasicLighting.vcxproj -> G:\Code\LearnOpenGL\LearnOpenGL\Debug\BasicLighting.exe
