@@ -29,7 +29,7 @@ float lastX = 400;
 float lastY = 300;
 
 // lighting
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(0.2f, 0.2f, 2.5f);
 
 int main()
 {
@@ -142,10 +142,12 @@ int main()
 
 	unsigned int diffuseMap = loadTexture("../resources/textures/container2.png");
 	unsigned int specularMap = loadTexture("../resources/textures/container2_specular.png");
+	unsigned int emissionMap = loadTexture("../resources/textures/matrix.jpg");
 
 	lightingShader.use();
 	lightingShader.setInt("material.diffuse", 0);
 	lightingShader.setInt("material.specular", 1);
+	lightingShader.setInt("material.emission", 2);
 
 
 	while (!glfwWindowShouldClose(window))
@@ -165,7 +167,7 @@ int main()
 	
 		lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
 		lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
-		lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		lightingShader.setVec3("light.specular", 1.5f, 1.5f, 1.5f);
 
 		lightingShader.setFloat("material.shininess", 64.0f);
 
@@ -183,6 +185,8 @@ int main()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, specularMap);
 
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, emissionMap);
 
 		glBindVertexArray(cubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
