@@ -43,7 +43,7 @@ void main()
 	
 	float distance = length(FragPos - light.position);
 	float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
-	attenuation *= 5.0;
+	//attenuation *= 5.0;
 	
 	ambient = ambient * attenuation;
 	diffuse = diffuse * attenuation;

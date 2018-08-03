@@ -14,7 +14,12 @@ struct DirLight
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
-}
+	
+	vec3 position;
+	float constant;
+	float linear;
+	float quadratic;
+};
 
 struct PointLight
 {
@@ -27,14 +32,14 @@ struct PointLight
 	float constant;
 	float linear;
 	float quadratic;
-}
+};
 
 struct SpotLight{
 	vec3 position;
 	vec3 direction;
 	
-	float cutoff;
-	float outerCutoff;
+	float cutOff;
+	float outerCutOff;
 		
 	float constant;
 	float linear;
@@ -43,7 +48,7 @@ struct SpotLight{
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
-}
+};
 
 #define NR_POINT_LIGHTS 4
 
@@ -53,8 +58,9 @@ in vec2 TexCoords;
 
 uniform vec3 viewPos;
 uniform Material material;
-uniform DirLight dirlight;
+uniform DirLight dirLight;
 uniform PointLight pointLight;
+uniform PointLight pointLights[NR_POINT_LIGHTS];
 uniform SpotLight spotLight;
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
@@ -65,10 +71,17 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 void main()
 {
 	vec3 norm = normalize(Normal);
-	vec3 viewDir = normalize(viewPos - fragPos);
+	vec3 viewDir = normalize(viewPos - FragPos);
 	
+	vec3 result;
+	result += CalcDirLight(dirLight, norm, viewDir);
+    for(int i = 0; i < NR_POINT_LIGHTS; i++)
+        result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);   	
+	//result += CalcPointLight(pointLight, norm, FragPos, viewDir);
+	//result += CalcSpotLight(spotLight, norm, FragPos, viewDir);
 	
-    FragColor = vec4(result, 1);
+
+    FragColor = vec4(result, 1);	
 }
 
 vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
@@ -83,6 +96,14 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
 	vec3 ambient = light.ambient * vec3(texture(material.diffuse, TexCoords));
 	vec3 diffuse = light.diffuse * diff * vec3(texture(material.diffuse, TexCoords));
 	vec3 specular = light.specular * spec * vec3(texture(material.specular, TexCoords));
+	
+	float distance = length(light.position - FragPos);
+	float attenuation = 1.0/ (light.constant + light.linear * distance + light.quadratic * distance * distance);
+	
+	ambient *= attenuation;
+	diffuse *= attenuation;
+	specular *= attenuation;
+	
 	
 	return ambient + diffuse + specular;
 }
@@ -100,8 +121,8 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * distance * distance);
 	
 	vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
-	vec3 diffuse = light.diffuse * texture(material.diffuse, TexCoords).rgb;
-	vec3 specular = light.specular * texture(material.specular, TexCoords).rgb;
+	vec3 diffuse = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;
+	vec3 specular = light.specular * spec * texture(material.specular, TexCoords).rgb;
 	
 	ambient *= attenuation;
 	diffuse *= attenuation;
@@ -122,14 +143,23 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 	float distance = length(fragPos - light.position);
 	float attenuation = 1.0/ (light.constant + light.linear * distance + light.quadratic * distance * distance);
 	
-	float spotLightDir = normalize(-light.direction);
-	float theta = dot(lightDir, spotLightDir);
-	float epsilon = light.cutoff - light.outerCutoff;
-	float intensity = clamp((theta - light.outerCutoff) / epsilon, 0.0, 1.0);
+	vec3 ambient = light.ambient * texture(material.diffuse, TexCoords).rgb;
+	vec3 diffuse = light.diffuse * diff * texture(material.diffuse, TexCoords).rgb;
+	vec3 specular = light.specular * spec * texture(material.specular, TexCoords).rgb;
 	
+	vec3 spotLightDir = normalize(-light.direction);
+	float theta = dot(lightDir, spotLightDir);
+	float epsilon = light.cutOff - light.outerCutOff;
+	float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
+
+	vec3 finalColor;
+
 	ambient *= attenuation * intensity;
 	diffuse *= attenuation * intensity;
 	specular *= attenuation * intensity;
+
+	finalColor = ambient + diffuse + specular;
+
 	
-	return ambient + diffuse + specular;
+	return finalColor;
 }
