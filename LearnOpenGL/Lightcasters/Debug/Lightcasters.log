@@ -1,1 +1,13 @@
-﻿  Lightcasters.vcxproj -> D:\VSProject\LearnOpenGL\LearnOpenGL\Debug\Lightcasters.exe
+﻿  glad.c
+  main.cpp
+d:\vsproject\learnopengl\learnopengl\shadertool\shader.h(55): warning C4101: “infoLog”: 未引用的局部变量
+d:\vsproject\learnopengl\learnopengl\shadertool\shader.h(54): warning C4101: “success”: 未引用的局部变量
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(162): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(265): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(266): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(270): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(271): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(273): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(274): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+d:\vsproject\learnopengl\learnopengl\lightcasters\main.cpp(288): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  Lightcasters.vcxproj -> D:\VSProject\LearnOpenGL\LearnOpenGL\Debug\Lightcasters.exe

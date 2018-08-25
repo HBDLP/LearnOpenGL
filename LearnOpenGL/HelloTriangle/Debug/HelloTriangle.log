@@ -1,1 +1,3 @@
-﻿  HelloTriangle.vcxproj -> D:\VSProject\LearnOpenGL\LearnOpenGL\Debug\HelloTriangle.exe
+﻿  glad.c
+  main.cpp
+  HelloTriangle.vcxproj -> D:\VSProject\LearnOpenGL\LearnOpenGL\Debug\HelloTriangle.exe

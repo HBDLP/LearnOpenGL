@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;..\stb;..\..\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\glfw\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>..\..\glfw\lib;D:\VSProject\LearnOpenGL\LearnOpenGL\ThirdPart;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,7 +81,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;OpenGL32.Lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
