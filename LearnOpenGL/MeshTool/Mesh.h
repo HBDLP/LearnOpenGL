@@ -37,6 +37,8 @@ public:
 		this->vertices = vertices;
 		this->textures = textures;
 		this->indices = indices;
+
+		SetupMesh();
 	}
 
 	void Draw(Shader shader)

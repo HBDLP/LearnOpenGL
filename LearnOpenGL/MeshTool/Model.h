@@ -22,24 +22,27 @@ class Model
 {
 public:
 	vector<Texture> textures_loaded;
-	vector<Mesh> meshs;
+	vector<Mesh> meshes;
 	string directory;
 	bool gammaCorrection;
 
 
-	Model(char* path)
+	Model(const char* path)
 	{
-
+		loadModel(path);
 	}
-	void Draw(Shader shader){}
+	void Draw(Shader shader){
+		for(unsigned int i = 0; i < meshes.size(); i++)
+		{
+			meshes[i].Draw(shader);
+		}
+	}
 private:
-	vector<Mesh> meshs;
-	string directory;
-	
+
 	void loadModel(string path)
 	{
 		Assimp::Importer importer;
-		const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+		const aiScene *scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
@@ -54,10 +57,10 @@ private:
 
 	void processNode(aiNode* node, const aiScene* scene)
 	{
-		for (unsigned int index = 0; index < scene->mNumMeshes; index++)
+		for (unsigned int index = 0; index < node->mNumMeshes; index++)
 		{
 			aiMesh* mesh = scene->mMeshes[node->mMeshes[index]];
-			meshs.push_back(processMesh(mesh, scene));
+			meshes.push_back(processMesh(mesh, scene));
 		}
 
 		for (unsigned int index = 0; index < node->mNumChildren; index++)
@@ -69,7 +72,7 @@ private:
 
 	Mesh processMesh(aiMesh* mesh, const aiScene* scene)
 	{
-		vector<Vertex> verteices;
+		vector<Vertex> vertices;
 		vector<unsigned int> indices;
 		vector<Texture> textures;
 
@@ -110,7 +113,7 @@ private:
 			vector.z = mesh->mBitangents[i].z;
 			vertex.Bitangent = vector;
 
-			verteices.push_back(vertex);
+			vertices.push_back(vertex);
 		}
 
 		for (unsigned int i = 0; i < mesh->mNumFaces; i++)
@@ -124,8 +127,19 @@ private:
 
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-		//vector<Texture> diffuseMaps = loadMaterialt
+		vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
+		vector<Texture> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+
+		vector<Texture> normalMaps = loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+
+		vector<Texture> heightMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+		textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+
+		return Mesh(vertices, indices, textures);
 	}
 
 	vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName)
@@ -150,9 +164,9 @@ private:
 			if (!skip)
 			{
 				Texture texture;
-				texture.id = TexutreFromFile(str.C_Str(), this->directory, false);
+				texture.id = TextreFromFile(str.C_Str(), this->directory, false);
 				texture.type = typeName;
-				texture.path = str.Clear;
+				texture.path = str.C_Str();
 				textures.push_back(texture);
 				textures_loaded.push_back(texture);
 			}
@@ -161,7 +175,7 @@ private:
 		return textures;
 	}
 
-	unsigned int TexutreFromFile(const char* path, const string& directory, bool gamma)
+	unsigned int TextreFromFile(const char* path, const string& directory, bool gamma)
 	{
 		string filename = string(path);
 		filename = directory + '/' + filename;
