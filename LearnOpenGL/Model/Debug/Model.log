@@ -1,24 +1,12 @@
 ﻿  main.cpp
-d:\vsproject\learnopengl\learnopengl\shadertool\shader.h(55): warning C4101: “infoLog”: 未引用的局部变量
-d:\vsproject\learnopengl\learnopengl\shadertool\shader.h(54): warning C4101: “success”: 未引用的局部变量
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(169): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(189): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(190): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(206): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(207): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(214): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(215): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(222): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(223): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(230): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(231): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(240): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(241): warning C4305: “参数”: 从“double”到“float”截断
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(333): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(334): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(338): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(339): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(341): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(342): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-d:\vsproject\learnopengl\learnopengl\model\main.cpp(356): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
-  Model.vcxproj -> D:\VSProject\LearnOpenGL\LearnOpenGL\Debug\Model.exe
+g:\code\learnopengl\learnopengl\shadertool\shader.h(55): warning C4101: “infoLog”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\shadertool\shader.h(54): warning C4101: “success”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\model\main.cpp(69): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(130): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(131): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(135): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(136): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(138): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(139): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(153): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  Model.vcxproj -> G:\Code\LearnOpenGL\LearnOpenGL\Debug\Model.exe

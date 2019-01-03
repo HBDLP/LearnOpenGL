@@ -59,8 +59,7 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	Shader lightingShader("6.multiple_lights.vs", "6.multiple_lights.fs");
-	Shader lampShader("6.lamp.vs", "6.lamp.fs");
+	//Shader ourShader("1.model_loading");
 
 	float vertices[] = {
 		// positions          // normals           // texture coords
