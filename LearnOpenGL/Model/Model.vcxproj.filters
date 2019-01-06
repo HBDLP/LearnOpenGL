@@ -49,16 +49,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="6.lamp.fs">
+    <None Include="1.model_loading.fs">
       <Filter>Shader</Filter>
     </None>
-    <None Include="6.lamp.vs">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="6.multiple_lights.fs">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="6.multiple_lights.vs">
+    <None Include="1.model_loading.vs">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>

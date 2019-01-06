@@ -1,0 +1,39 @@
+﻿  glad.c
+  main.cpp
+g:\code\learnopengl\learnopengl\shadertool\shader.h(55): warning C4101: “infoLog”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\shadertool\shader.h(54): warning C4101: “success”: 未引用的局部变量
+g:\code\learnopengl\learnopengl\meshtool\mesh.h(78): warning C4267: “参数”: 从“size_t”转换到“GLsizei”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(69): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(130): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(131): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(135): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(136): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(138): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(139): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+g:\code\learnopengl\learnopengl\model\main.cpp(153): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+  stb_image.cpp
+  正在生成代码...
+main.obj : error LNK2019: 无法解析的外部符号 glfwInit，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwTerminate，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwWindowHint，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwCreateWindow，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwWindowShouldClose，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetWindowShouldClose，该符号在函数 "void __cdecl processInput(struct GLFWwindow *)" (?processInput@@YAXPEAUGLFWwindow@@@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetFramebufferSizeCallback，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwPollEvents，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwGetKey，该符号在函数 "void __cdecl processInput(struct GLFWwindow *)" (?processInput@@YAXPEAUGLFWwindow@@@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwGetMouseButton，该符号在函数 "void __cdecl mouse_callback(struct GLFWwindow *,double,double)" (?mouse_callback@@YAXPEAUGLFWwindow@@NN@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetCursorPosCallback，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSetScrollCallback，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwGetTime，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwMakeContextCurrent，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwSwapBuffers，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 glfwGetProcAddress，该符号在函数 main 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl Assimp::Importer::Importer(void)" (??0Importer@Assimp@@QEAA@XZ)，该符号在函数 "private: void __cdecl Model::loadModel(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?loadModel@Model@@AEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 "public: __cdecl Assimp::Importer::~Importer(void)" (??1Importer@Assimp@@QEAA@XZ)，该符号在函数 "private: void __cdecl Model::loadModel(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?loadModel@Model@@AEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 "public: struct aiScene const * __cdecl Assimp::Importer::ReadFile(char const *,unsigned int)" (?ReadFile@Importer@Assimp@@QEAAPEBUaiScene@@PEBDI@Z)，该符号在函数 "public: struct aiScene const * __cdecl Assimp::Importer::ReadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned int)" (?ReadFile@Importer@Assimp@@QEAAPEBUaiScene@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 "public: char const * __cdecl Assimp::Importer::GetErrorString(void)const " (?GetErrorString@Importer@Assimp@@QEBAPEBDXZ)，该符号在函数 "private: void __cdecl Model::loadModel(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?loadModel@Model@@AEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 aiGetMaterialTextureCount，该符号在函数 "public: unsigned int __cdecl aiMaterial::GetTextureCount(enum aiTextureType)const " (?GetTextureCount@aiMaterial@@QEBAIW4aiTextureType@@@Z) 中被引用
+main.obj : error LNK2019: 无法解析的外部符号 aiGetMaterialTexture，该符号在函数 "public: enum aiReturn __cdecl aiMaterial::GetTexture(enum aiTextureType,unsigned int,struct aiString *,enum aiTextureMapping *,unsigned int *,float *,enum aiTextureOp *,enum aiTextureMapMode *)const " (?GetTexture@aiMaterial@@QEBA?AW4aiReturn@@W4aiTextureType@@IPEAUaiString@@PEAW4aiTextureMapping@@PEAIPEAMPEAW4aiTextureOp@@PEAW4aiTextureMapMode@@@Z) 中被引用
+..\..\glfw\lib\glfw3.lib : warning LNK4272: 库计算机类型“x86”与目标计算机类型“x64”冲突
+G:\Code\LearnOpenGL\LearnOpenGL\x64\Debug\Model.exe : fatal error LNK1120: 22 个无法解析的外部命令

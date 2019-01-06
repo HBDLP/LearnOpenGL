@@ -73,6 +73,10 @@
     <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;..\stb;..\..\glm;..\..\assimp-3.1.1\include;$(IncludePath)</IncludePath>
     <LibraryPath>..\..\glfw\lib;..\ThirdPart;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\..\assimp-3.1.1\include;..\stb;..\..\glad\include;..\..\glfw\include;..\..\glm\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\glfw\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -91,6 +95,9 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>glfw3.lib;OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -133,10 +140,8 @@
     <ClInclude Include="..\stb\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="6.lamp.fs" />
-    <None Include="6.lamp.vs" />
-    <None Include="6.multiple_lights.fs" />
-    <None Include="6.multiple_lights.vs" />
+    <None Include="1.model_loading.fs" />
+    <None Include="1.model_loading.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
