@@ -61,10 +61,12 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	glEnalbe(GL_STENCIL_TEST);
+	glStencilFunc(GL_NOTEQUAL, 1, 0xff);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-
-	Shader shader("1.1.depth_testing.vs", "1.1.depth_testing.fs");
-	// Model outModel("../resources/objects/nanosuit/nanosuit.obj");
+	Shader shader("2.stencil_testing.vs", "2.stencil_testing.fs");
+	Shader shaderSingleColor("2.stencil_testing.vs", "2.stencil_single_color.fs");
 
 	float cubeVertices[] = {
 		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
