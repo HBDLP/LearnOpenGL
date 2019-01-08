@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{9C2BA9CA-397C-4E9F-A19D-9692648C7C92}</ProjectGuid>
+    <ProjectGuid>{0679BC31-FA39-4905-ACAC-2DF04DF0A671}</ProjectGuid>
     <RootNamespace>LearnOpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
