@@ -65,13 +65,15 @@ int main()
 	}
 
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
+	//glDepthFunc(GL_LESS);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	Shader shader("cubemap_obj.vs", "cubemap_obj.fs");
-	Shader skyboxShader("cubemap_scene.vs", "cubemap_scene.fs");
+	Shader reflectShader("cubemap_reflectobj.vs", "cubemap_reflectobj.fs");
+	Shader reflectFragShader("cubemap_reflectobj_frag.vs", "cubemap_reflectobj_frag.fs");
+	Shader skyboxShader("cubemap_skybox.vs", "cubemap_skybox.fs");
 	// Model outModel("../resources/objects/nanosuit/nanosuit.obj");
 
 	float cubeVertices[] = {
@@ -119,6 +121,50 @@ int main()
 		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f  // bottom-left        
 	};
 
+	float reflectvertices[] = {
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+	};
+
 	float planeVertices[] = {
          5.0f, -0.5f,  5.0f,  2.0f, 0.0f,
         -5.0f, -0.5f,  5.0f,  0.0f, 0.0f,
@@ -129,18 +175,60 @@ int main()
          5.0f, -0.5f, -5.0f,  2.0f, 2.0f	
 	};
 
+	float skyboxVertices[] = {
+		// positions          
+		-1.0f,  1.0f, -1.0f,
+		-1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f, -1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+
+		-1.0f, -1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f, -1.0f,  1.0f,
+		-1.0f, -1.0f,  1.0f,
+
+		-1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f, -1.0f,
+		 1.0f,  1.0f,  1.0f,
+		 1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f,  1.0f,
+		-1.0f,  1.0f, -1.0f,
+
+		-1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		 1.0f, -1.0f, -1.0f,
+		 1.0f, -1.0f, -1.0f,
+		-1.0f, -1.0f,  1.0f,
+		 1.0f, -1.0f,  1.0f
+	};
+
 	unsigned int cubeMapVAO, cubeMapVBO;
 	glGenVertexArrays(1, &cubeMapVAO);
 	glGenBuffers(1, &cubeMapVBO);
 	glBindVertexArray(cubeMapVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, cubeMapVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glBindVertexArray(0);
-
 
 	unsigned int cubeVAO, cubeVBO;
 	glGenVertexArrays(1, &cubeVAO);
@@ -152,6 +240,30 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glBindVertexArray(0);
+
+	unsigned int reflectVAO, reflectVBO;
+	glGenVertexArrays(1, &reflectVAO);
+	glGenBuffers(1, &reflectVBO);
+	glBindVertexArray(reflectVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, reflectVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(reflectvertices), &reflectvertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glBindVertexArray(0);
+
+	unsigned int reflectFragVAO, reflectFragVBO;
+	glGenVertexArrays(1, &reflectFragVAO);
+	glGenBuffers(1, &reflectFragVBO);
+	glBindVertexArray(reflectFragVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, reflectFragVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(reflectvertices), &reflectvertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glBindVertexArray(0);
 
 	unsigned int planeVAO, planeVBO;
@@ -179,8 +291,16 @@ int main()
 	};
 	unsigned int cubemapTexture = loadCubemap(faces);
 
+	glEnable(GL_DEPTH_TEST);
+
 	shader.use();
 	shader.setInt("texture1", 0);
+
+	reflectShader.use();
+	reflectShader.setInt("skybox", 0);
+
+	reflectFragShader.use();
+	reflectFragShader.setInt("skybox", 0);
 
 	skyboxShader.use();
 	skyboxShader.setInt("skybox", 0);
@@ -196,28 +316,9 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glEnable(GL_DEPTH_TEST);
-
 		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 scale = glm::mat4(1.f);
-		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-
-
-		glDepthMask(GL_FALSE);
-		skyboxShader.use();
-		glBindVertexArray(cubeMapVAO);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-		view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-		shader.setMat4("view", view);
-		shader.setMat4("projection", projection);
-		model = glm::translate(model, glm::vec3(0.f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(2.f, 2.f, 2.f));
-		shader.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glDepthMask(GL_TRUE);
-
-
 
 		shader.use();
 		view = camera.GetViewMatrix();
@@ -242,15 +343,61 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindVertexArray(0);
 
+		reflectShader.use();
+		view = camera.GetViewMatrix();
+		reflectShader.setMat4("view", view);
+		reflectShader.setMat4("projection", projection);
+		reflectShader.setMat4("model", glm::mat4(1.0f));
+		reflectShader.setVec3("campos", camera.Position);
+		glBindVertexArray(reflectVAO);
+		glActiveTexture(0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+		reflectFragShader.use();
+		view = camera.GetViewMatrix();
+		reflectFragShader.setMat4("view", view);
+		reflectFragShader.setMat4("projection", projection);
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+		reflectFragShader.setMat4("model", model);
+
+		reflectFragShader.setVec3("campos", camera.Position);
+		glBindVertexArray(reflectFragVAO);
+		glActiveTexture(0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+		glDepthFunc(GL_LEQUAL);
+		skyboxShader.use();
+		view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+		skyboxShader.setMat4("view", view);
+		skyboxShader.setMat4("projection", projection);
+
+		glBindVertexArray(cubeMapVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+		glDepthFunc(GL_LESS);
+
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
 	glDeleteVertexArrays(1, &cubeVAO);
 	glDeleteVertexArrays(1, &planeVAO);
+	glDeleteVertexArrays(1, &reflectVAO);
+	glDeleteVertexArrays(1, &reflectFragVAO);
 	glDeleteVertexArrays(1, &cubeMapVAO);
 	glDeleteBuffers(1, &cubeVBO);
 	glDeleteBuffers(1, &planeVBO);
+	glDeleteBuffers(1, &reflectVBO);
+	glDeleteBuffers(1, &reflectFragVBO);
 	glDeleteBuffers(1, &cubeMapVBO);
 	
 	glfwTerminate();	
