@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{79692BE9-5235-4DE0-90F1-0C9D96D9A707}</ProjectGuid>
+    <ProjectGuid>{3EDD608D-EE2E-44A6-9A8F-D324A7853993}</ProjectGuid>
     <RootNamespace>LearnOpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;..\stb;..\..\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>..\..\glfw\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\..\glad\include;..\..\glfw\include;..\..\include\GLFW;..\stb;..\..\glm;..\..\assimp-3.1.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\glfw\lib;..\ThirdPart;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>..\..\assimp-3.1.1\include;..\stb;..\..\glad\include;..\..\glfw\include;..\..\glm\;$(IncludePath)</IncludePath>
@@ -85,7 +85,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;OpenGL32.Lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -135,6 +135,8 @@
   <ItemGroup>
     <ClInclude Include="..\CameraTool\camera.h" />
     <ClInclude Include="..\LightTool\Light.h" />
+    <ClInclude Include="..\MeshTool\Mesh.h" />
+    <ClInclude Include="..\MeshTool\Model.h" />
     <ClInclude Include="..\ShaderTool\Shader.h" />
     <ClInclude Include="..\stb\stb_image.h" />
   </ItemGroup>
